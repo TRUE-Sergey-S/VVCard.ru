@@ -1,0 +1,40 @@
+﻿@model List<Card>
+@{
+    ViewData["Title"] = "VVCard - Сайт визитка";
+}
+@if (Model.Count > 1)
+{
+<div>
+    <h3>Новости</h3>
+    0.7.0<br />
+    - Добавлен функционал для отслеживания кликов по ссылкам в визитке,<br /> 
+    теперь появилась возможность отследить по каким ссылкам и сколько раз перешли.<br />
+    Подробней в <a href="https://vk.com/vvcardru">группе ВК</a>
+</div>
+
+    <h3 class="border-top">Cлучайные визитки</h3>
+}
+else
+{
+    ViewData["Title"] = $"{ Model.Select(x => x.Name).FirstOrDefault()}";
+}
+<div class="d-grid col-6 mx-auto">
+    @foreach (var item in Model)
+    {
+        if (item != null)
+        {
+            <h4 class="text-center">@item.Name</h4>
+            var allfields = item.cardFields;
+            if (allfields != null)
+            {
+                foreach (var itemFields in allfields)
+                {
+                    if (itemFields.FieldName != null)
+                    {
+                        <a class="btn btn-outline-secondary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                    }
+                }
+            }
+        }
+    }
+</div>

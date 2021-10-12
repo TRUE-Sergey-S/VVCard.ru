@@ -1,0 +1,47 @@
+﻿@model List<Card>
+@{
+    ViewData["Title"] = "Список карт";
+}
+<div class="d-grid col-6 mx-auto">
+    <h3>Мои визитки</h3>
+    @foreach (var item in Model)
+    {
+        if (item != null)
+        {
+    <h4 class="text-center">@item.Name</h4>
+            var allfields = item.cardFields;
+            foreach (var itemFields in allfields)
+            {
+                if (itemFields.FieldName != null || itemFields.FieldValue != null)
+                {
+                    int clickCountLastDay = itemFields.ClickCardFields.Where(d => d.DateTime.Day == DateTime.Now.Day).ToList().Count;
+                    int clickCountLastMonth = itemFields.ClickCardFields.Where(d => d.DateTime.Month == DateTime.Now.Month).ToList().Count;
+                    <div class="d-grid col-12 mx-auto"><a class="btn btn-outline-secondary col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a><div class="align-content-center">↑ Всего кликов по кнопке: (<b> @itemFields.ClickCardFields.Count </b>) | За месяц: ( @clickCountLastMonth ) | За день: ( @clickCountLastDay ) ↑</div></div><br>
+                }
+            }
+<div>
+    @{
+        int visitCountLastDay = item.visitСounter.Where(d => d.DateTime.Day == DateTime.Now.Day).ToList().Count;
+        int visitCountLastMonth = item.visitСounter.Where(d => d.DateTime.Month == DateTime.Now.Month).ToList().Count;
+    }
+    @{
+        string qrCode = string.Format("https://chart.googleapis.com/chart?cht=qr&chld=H|1&chl=https://vvcard.ru/" + item.Id + "&chs=170x170");
+        string idUrl = string.Format("https://vvcard.ru/" + item.Id);
+        string PublicIDUrl = string.Format("https://vvcard.ru/" + item.PublicID);
+        <img class="rounded float-end border-0" src="@qrCode" />
+        <p>QRCode можно использовать на печатных визитках</p>
+        <p>Визитка доступна по адресу: <a href="@PublicIDUrl">https://vvcard.ru/<text>@item.PublicID</a></p>
+        <p>Постоянный адрес: <a href="@idUrl">https://vvcard.ru/<text>@item.Id</a></p>
+        <p>
+            Просморты всего: <a href="~/Card/ShowVisits?Id=@item.Id">( @item.visitСounter?.Count )<text></a> |
+            За месяц: <a href="~/Card/ShowVisits?Id=@item.Id&format=Month">( @visitCountLastMonth )<text></a> |
+            За день: <a href="~/Card/ShowVisits?Id=@item.Id&format=Day">( @visitCountLastDay )<text></a></p>
+        <a class="btn btn-secondary" href="~/Card/Edit/@item.Id">Редактировать</a><br><br>
+
+        }
+</div>
+                }
+            }
+    <a class="btn btn-secondary" href="~/Card/Create">Создать новую</a><br><br>
+</div>
+

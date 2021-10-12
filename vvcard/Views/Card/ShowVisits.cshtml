@@ -1,0 +1,31 @@
+﻿@model List<VisitСounter>
+@{
+    ViewData["Title"] = "Статистика посещений карты";
+}
+<div class="d-grid col-6 mx-auto">
+    <h3>Статистика посещений карты</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Город</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int index = 1; }  
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@index</th>
+                    <td>@item.DateTime</td>
+                    <td>@item.City</td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+        <a class="btn btn-secondary" href="~/Card/ShowPersonalCard">Вернуться к списку карт</a>
+        <br>
+        <br>
+</div>

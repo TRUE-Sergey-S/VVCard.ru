@@ -1,0 +1,53 @@
+﻿@model Card
+@{
+    ViewData["Title"] = "Редактирование карты";
+}
+<form asp-antiforgery="true" asp-action="Edit" asp-controller="Card">
+    <div>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="mb-3 row">
+            <input class="col-sm-6 col-md-5 col-lg-4 col-xl-3" type="text" asp-for="PublicID" />
+            <label class="col-auto" asp-for="PublicID"><abbr title="Визитка будет доступка по адресу https://vvcard.ru/Ваш адрес" class="attribute">Адрес визитки</abbr></label>
+            <span asp-validation-for="PublicID" />
+        </div>
+        <div class="mb-3 row">
+            <input class="col-sm-6 col-md-5 col-lg-4 col-xl-3" type="text" asp-for="Name" />
+            <label class="col-auto" asp-for="Name">Имя визитки</label>
+            <span asp-validation-for="Name" />
+        </div>
+        <div mb-3 row>
+            <input type="checkbox" asp-for="IsPrivate" />
+            <label class="col-auto" asp-for="Name">Не показывать на главной странице</label>
+        </div>
+        <div id="cardFields"  onload='GetElementValue();'>
+            @{
+                if (Model.cardFields.Count == 0)
+                {
+                    Model.cardFields.Add(new CardField());
+                }
+                int lastIndex = 0;
+                for (int i = 0; i < Model.cardFields.Count; i++)
+                {
+                    <div class="cardField">
+                        <input class="col-sm-3 col-md-3 col-lg-3 col-xl-3" type="text" asp-for="@Model.cardFields[i].FieldValue" />
+                        <label class="col-auto"> - Ссылка  </label>
+                        <input class="col-sm-3 col-md-3 col-lg-3 col-xl-3" type="text" asp-for="@Model.cardFields[i].FieldName" />
+                        <label class="col-auto"> - Название <a class="btn btn-outline-secondary" onclick="DeleteElement(@i,event)">Удалить</a> </label>
+                    </div>
+                    lastIndex = i;
+                }
+            }
+        </div>
+        <a class="btn btn-outline-secondary col-1" onclick="AddNewElement(@lastIndex)">Добавить поле</a>
+        <div mb-3 row>
+            <input class="btn btn-secondary col-1" type="submit" value="Отправить" />
+            <a class="btn btn-outline-secondary col-1" href="~/Card/Delete/@Model.Id">Удалить</a>
+        </div>
+    </div>
+</form>
+<script>
+</script>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

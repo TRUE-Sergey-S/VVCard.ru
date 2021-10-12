@@ -1,0 +1,24 @@
+﻿@model Card
+@{
+    ViewData["Title"] = "Удаление карты";
+}
+<div class="text-center">
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+        <table>
+            <tr>
+                <td>Вы действительно хотите удалить визитную карточку:</td>
+            </tr>
+            <tr>
+                <td>PublicID:</td>
+                <td>@Model.PublicID</td>
+
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr><td><input type="submit" value="Удалить без возможности возврата" /></td><td></td></tr>
+        </table>
+    </form>
+</div>

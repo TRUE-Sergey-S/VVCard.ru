@@ -1,0 +1,21 @@
+﻿@model Card
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    @if (Model != null)
+        {
+            <p>Id: @Model.Id</p>
+            <p>PublicId: @Model.PublicID</p>
+            <p>@Model.Name</p>
+            <a href="~/Card/Edit/@Model.Id">Редактировать</a><br><br>
+            var allfields = Model.cardFields;
+            foreach (var itemFields in allfields)
+            {
+                <a href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+            }
+            <br><br>
+        }
+    }
+</div>
+
