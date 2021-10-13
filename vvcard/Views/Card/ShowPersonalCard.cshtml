@@ -14,15 +14,15 @@
             {
                 if (itemFields.FieldName != null || itemFields.FieldValue != null)
                 {
-                    int clickCountLastDay = itemFields.ClickCardFields.Where(d => d.DateTime.Day == DateTime.Now.Day).ToList().Count;
+                    int clickCountLastDay = itemFields.ClickCardFields.Where(d => d.DateTime.Day == DateTime.Now.Day && d.DateTime.Month == DateTime.Now.Month).ToList().Count;
                     int clickCountLastMonth = itemFields.ClickCardFields.Where(d => d.DateTime.Month == DateTime.Now.Month).ToList().Count;
                     <div class="d-grid col-12 mx-auto"><a class="btn btn-outline-secondary col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a><div class="align-content-center">↑ Всего кликов по кнопке: (<b> @itemFields.ClickCardFields.Count </b>) | За месяц: ( @clickCountLastMonth ) | За день: ( @clickCountLastDay ) ↑</div></div><br>
                 }
             }
 <div>
     @{
-        int visitCountLastDay = item.visitСounter.Where(d => d.DateTime.Day == DateTime.Now.Day).ToList().Count;
-        int visitCountLastMonth = item.visitСounter.Where(d => d.DateTime.Month == DateTime.Now.Month).ToList().Count;
+        int visitCountLastDay = item.visitСounter.Where(d => d.DateTime.Day == DateTime.Now.Day && d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToList().Count;
+        int visitCountLastMonth = item.visitСounter.Where(d => d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToList().Count;
     }
     @{
         string qrCode = string.Format("https://chart.googleapis.com/chart?cht=qr&chld=H|1&chl=https://vvcard.ru/" + item.Id + "&chs=170x170");

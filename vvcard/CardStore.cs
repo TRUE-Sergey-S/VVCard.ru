@@ -222,10 +222,10 @@ namespace vvcard
                     switch (format)
                     {
                         case "Day":
-                            visits = await db.VisitСounters.Where(x => x.CardId == cardId && x.DateTime.Day == DateTime.Now.Day).ToListAsync();
+                            visits = await db.VisitСounters.Where(d => d.CardId == cardId && d.DateTime.Day == DateTime.Now.Day && d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToListAsync();
                             break;
                         case "Mouth":
-                            visits = await db.VisitСounters.Where(x => x.CardId == cardId && x.DateTime.Month == DateTime.Now.Month).ToListAsync();
+                            visits = await db.VisitСounters.Where(d => d.CardId == cardId && d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToListAsync();
                             break;
                         default: visits = await db.VisitСounters.Where(x => x.CardId == cardId).ToListAsync();
                             break;
