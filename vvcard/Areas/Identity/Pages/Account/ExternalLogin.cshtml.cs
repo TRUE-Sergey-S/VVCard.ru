@@ -24,13 +24,16 @@ namespace vvcard.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private IRepository repository;
 
         public ExternalLoginModel(
             SignInManager<User> signInManager,
             UserManager<User> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRepository repo)
         {
+            repository = repo;
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
@@ -86,6 +89,9 @@ namespace vvcard.Areas.Identity.Pages.Account
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
             if (result.Succeeded)
             {
+                //TODO Убрать костыль для логирования входа черех стороние сервисы или не убирать...
+                var userName = info.Principal.Claims.FirstOrDefault(x => x.Value.Contains("@"));
+                await repository.AddLastLogInData(userName.Value);
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
                 return LocalRedirect(returnUrl);
             }
@@ -122,7 +128,7 @@ namespace vvcard.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.Email, Email = Input.Email, RegisterData = DateTime.Now.ToString() };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

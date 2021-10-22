@@ -7,6 +7,8 @@ namespace vvcard.Models
     {
         public override string Id { get; set; }
         public override string UserName { get; set; }
+        public string RegisterData { get; set; }
+        public string LastLogInData { get; set; }
         public List<Card> Cards = new List<Card>();
     }
 }

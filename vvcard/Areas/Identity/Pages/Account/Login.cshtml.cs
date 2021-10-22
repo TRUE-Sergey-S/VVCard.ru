@@ -21,11 +21,13 @@ namespace vvcard.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private IRepository repository;
 
         public LoginModel(SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager, IRepository repo)
         {
+            repository = repo;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -85,10 +87,12 @@ namespace vvcard.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                //TODO придумать более елегантный способ длогирования последнего входа
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    await repository.AddLastLogInData(Input.UserName);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -264,5 +264,15 @@ namespace vvcard
            await db.ClickCardFields.AddAsync(new ClickCardField { CardFieldId = cardFieldId, Ip = ip, DateTime = DateTime.Now });
            await db.SaveChangesAsync();
         }
+
+        public async Task AddLastLogInData(string userName)
+        {
+            var user = await db.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            if (user != null)
+            {
+                user.LastLogInData = DateTime.Now.ToString();
+                db.SaveChanges();
+            }
+        }
     }
 }

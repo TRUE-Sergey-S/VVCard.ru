@@ -20,5 +20,6 @@ namespace vvcard.Models
         Task AddNewVisitAsync(string ClientIp, int cardID, string userAgentString);
         Task<List<VisitСounter>> GetVisits(string userName, int cardId, string format);
         Task AddCardFieldClick(int cardFieldId, string Ip);
+        Task AddLastLogInData(string userName);
     }
 }
