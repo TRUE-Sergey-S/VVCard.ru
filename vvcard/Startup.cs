@@ -37,10 +37,20 @@ namespace vvcard
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDistributedMemoryCache();
-            services.AddSession(option=> {
-            option.IdleTimeout = TimeSpan.FromMinutes(30);
-            });
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+                    options.ClientId = Configuration["Google-OAuth:ClientId"];
+                    options.ClientSecret = Configuration["Google-OAuth:ClientSecret"];
+                    options.CallbackPath = new PathString("/GoogleLoginCallback");
+                });
+                    services.AddDistributedMemoryCache();
+                    services.AddSession(option =>
+                    {
+                        option.IdleTimeout = TimeSpan.FromMinutes(30);
+                    });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.

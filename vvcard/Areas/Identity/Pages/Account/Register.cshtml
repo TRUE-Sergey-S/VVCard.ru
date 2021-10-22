@@ -37,11 +37,12 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Регистрация через сторонние сервисы</h4>
+            <h4>Авторизация через внешние сервисы</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <div>
                         <p>
                             *Раздел в разработке* <br />
