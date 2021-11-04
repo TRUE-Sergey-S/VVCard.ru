@@ -153,7 +153,9 @@ namespace vvcard
         public async Task<bool> EditCardAsync(Card card, string userName)
         {
             User user = await db.Users.FirstOrDefaultAsync(x => x.UserName == userName);
-            Card dbCard = await db.Cards.FirstOrDefaultAsync(x => x.Id == card.Id && x.UserId == user.Id);
+            Card dbCard = await db.Cards
+                .Include(c=>c.cardFields)
+                .FirstOrDefaultAsync(x => x.Id == card.Id && x.UserId == user.Id);
             if (await CheckCardNameAsync(card.PublicID, userName))
             {
                 if (dbCard != null)
@@ -224,7 +226,7 @@ namespace vvcard
                         case "Day":
                             visits = await db.VisitСounters.Where(d => d.CardId == cardId && d.DateTime.Day == DateTime.Now.Day && d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToListAsync();
                             break;
-                        case "Mouth":
+                        case "Month":
                             visits = await db.VisitСounters.Where(d => d.CardId == cardId && d.DateTime.Month == DateTime.Now.Month && d.DateTime.Year == DateTime.Now.Year).ToListAsync();
                             break;
                         default: visits = await db.VisitСounters.Where(x => x.CardId == cardId).ToListAsync();

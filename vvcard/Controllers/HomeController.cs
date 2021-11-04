@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using vvcard.Models;
+using static vvcard.Models.CardField;
 
 namespace vvcard.Controllers
 {

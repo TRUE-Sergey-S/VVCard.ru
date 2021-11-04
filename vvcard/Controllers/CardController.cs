@@ -42,6 +42,10 @@ namespace vvcard.Controllers
         {
             Card card = new Card();
             card.cardFields = new List<CardField>();
+            for (int i = 0; i < 6; i++)
+            {
+                card.cardFields.Add(new CardField {FieldType = 2 });
+            }
             return View(card);
         }
 

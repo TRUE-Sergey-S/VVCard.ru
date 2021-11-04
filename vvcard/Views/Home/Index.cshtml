@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "VVCard - Сайт визитка";
 }
+
 @if (Model.Count > 1)
 {
 <div>
@@ -22,7 +23,7 @@ else
     {
         if (item != null)
         {
-            <h4 class="text-center">@item.Name</h4>
+    <h4 class="text-center">@item.Name</h4>
             var allfields = item.cardFields;
             if (allfields != null)
             {
@@ -30,7 +31,29 @@ else
                 {
                     if (itemFields.FieldName != null)
                     {
-                        <a class="btn btn-outline-secondary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                        string fildName = "";
+                        switch (itemFields.FieldType)
+                        {
+                            case 1:
+                                <a class="btn btn-outline-light text-dark" @itemFields.Id>@itemFields.FieldName</a><br>
+                                break;
+                            case 2:
+                                <a class="btn btn-outline-primary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            case 3:
+                                fildName = "tel:";
+                                itemFields.FieldValue = fildName + itemFields.FieldValue;
+                                <a class="btn btn-outline-success" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            case 4:
+                                fildName = "mailto:";
+                                itemFields.FieldValue = fildName + itemFields.FieldValue;
+                                <a class="btn btn-outline-info" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            default:
+                                <a class="btn btn-outline-secondary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                        }
                     }
                 }
             }
