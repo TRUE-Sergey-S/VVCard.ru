@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using vvcard.Models;
 
 namespace vvcard
@@ -164,8 +161,18 @@ namespace vvcard
                     {
                         card.cardFields[i].Order = i;
                     }
-                    var cardFields = await db.CardFields.Where(x => x.CardId == dbCard.Id).ToListAsync();
-                    dbCard.cardFields = card.cardFields;
+                    if (card.cardFields.Count == dbCard.cardFields.Count)
+                    {
+                        for (int i = 0; i < card.cardFields.Count; i++)
+                        {
+                            dbCard.cardFields[i].FieldName = card.cardFields[i].FieldName;
+                            dbCard.cardFields[i].FieldValue = card.cardFields[i].FieldValue;
+                            dbCard.cardFields[i].FieldType = card.cardFields[i].FieldType;
+                        }
+                    }
+                    else {
+                        dbCard.cardFields = card.cardFields;
+                    }
                     dbCard.IsPrivate = card.IsPrivate;
                     dbCard.Name = card.Name;
                     dbCard.PublicID = card.PublicID;
