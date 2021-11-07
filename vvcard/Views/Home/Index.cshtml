@@ -7,24 +7,19 @@
 {
 <div>
     <h3>Новости</h3>
-    0.8.1<br />
-    - Добавлена возможность выбора/изменения типа поля визитки.<br />
-    Тип поля влияет на отображение(на данный момент изменяется цветовая гамма), также влияет на действие при нажатии, например для поля с телефонным номером произойдет вызов.
+    0.9.3<br />
+    - сайт оптимизирован для просмотра на мобильных устройствах<br />
+    - изменен текст сообщений при некорректном вводе, теперь все сообщения на русском.<br /><br />
+    З.Ы. Сайт на финишной прямой, конечно нет приделу совершенства, но еще немного и сайт будет полностью готов!<br />
     Подробней в <a href="https://vk.com/vvcardru">группе ВК</a>
 </div>
-
-    <h3 class="border-top">Cлучайные визитки</h3>
-}
-else
-{
-    ViewData["Title"] = $"{ Model.Select(x => x.Name).FirstOrDefault()}";
-}
-<div class="d-grid col-6 mx-auto">
+<h3 class="border-top">Cлучайные визитки</h3>
+<div class="d-grid col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-8 mx-auto">
     @foreach (var item in Model)
     {
         if (item != null)
         {
-    <h4 class="text-center">@item.Name</h4>
+            <h3 class="text-center">@item.Name</h3>
             var allfields = item.cardFields;
             if (allfields != null)
             {
@@ -36,23 +31,23 @@ else
                         switch (itemFields.FieldType)
                         {
                             case 1:
-                                <a class="btn btn-outline-light text-dark" @itemFields.Id>@itemFields.FieldName</a><br>
+                                <a class="btn text-dark btn-lg btn btn-outline-dark fs-4 col-form-label-sm disabled" @itemFields.Id>@itemFields.FieldName</a><br>
                                 break;
                             case 2:
-                                <a class="btn btn-outline-primary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                <a class="btn btn-outline-primary btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
                                 break;
                             case 3:
                                 fildName = "tel:";
                                 itemFields.FieldValue = fildName + itemFields.FieldValue;
-                                <a class="btn btn-outline-success" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                <a class="btn btn-outline-success btn-lg fs-4 flex-sm-row" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
                                 break;
                             case 4:
                                 fildName = "mailto:";
                                 itemFields.FieldValue = fildName + itemFields.FieldValue;
-                                <a class="btn btn-outline-info" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                <a class="btn btn-outline-info btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
                                 break;
                             default:
-                                <a class="btn btn-outline-secondary" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                <a class="btn btn-outline-secondary btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
                                 break;
                         }
                     }
@@ -61,3 +56,51 @@ else
         }
     }
 </div>
+}
+else
+{
+    ViewData["Title"] = $"{ Model.Select(x => x.Name).FirstOrDefault()}";
+<div class="d-grid col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-8 mx-auto">
+    @foreach (var item in Model)
+    {
+        if (item != null)
+        {
+            <h1 class="text-center">@item.Name</h1>
+            var allfields = item.cardFields;
+            if (allfields != null)
+            {
+                foreach (var itemFields in allfields)
+                {
+                    if (itemFields.FieldName != null)
+                    {
+                        string fildName = "";
+                        switch (itemFields.FieldType)
+                        {
+                            case 1:
+                                <a class="btn text-dark btn-lg btn btn-outline-dark fs-1 col-form-label-sm disabled" @itemFields.Id>@itemFields.FieldName</a><br>
+                                break;
+                            case 2:
+                                <a class="btn btn-outline-primary btn-lg fs-1" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            case 3:
+                                fildName = "tel:";
+                                itemFields.FieldValue = fildName + itemFields.FieldValue;
+                                <a class="btn btn-outline-success btn-lg fs-1 flex-sm-row" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            case 4:
+                                fildName = "mailto:";
+                                itemFields.FieldValue = fildName + itemFields.FieldValue;
+                                <a class="btn btn-outline-info btn-lg fs-1" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                            default:
+                                <a class="btn btn-outline-secondary btn-lg fs-1" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</div>
+}
+

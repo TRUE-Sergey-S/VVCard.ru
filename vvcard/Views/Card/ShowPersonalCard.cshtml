@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Список карт";
 }
-<div class="d-grid col-6 mx-auto">
+<div class="d-grid col-sm-12 col-md-11 col-lg-9 col-xl-8 mx-auto">
     <h3>Мои визитки</h3>
     @foreach (var item in Model)
     {
@@ -25,12 +25,12 @@
                     {
                         case 1:
                             <div class="d-grid col-12 mx-auto">
-                                <a class="btn btn-outline-light text-dark col-12">@itemFields.FieldName</a>
+                                <a class="btn text-dark btn-outline-dark btn-lg col-12 disabled">@itemFields.FieldName</a>
                             </div>
                             break;
                         case 2:
                             <div class="d-grid col-12 mx-auto">
-                                <a class="btn btn-outline-primary col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
+                                <a class="btn btn-outline-primary btn-lg col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
                             </div>
                             addClickStatictic();
                             break;
@@ -38,7 +38,7 @@
                             fildName = "tel:";
                             itemFields.FieldValue = fildName + itemFields.FieldValue;
                             <div class="d-grid col-12 mx-auto">
-                                <a class="btn btn-outline-success col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
+                                <a class="btn btn-outline-success btn-lg col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
                             </div>
                             addClickStatictic();
                             break;
@@ -46,13 +46,13 @@
                             fildName = "mailto:";
                             itemFields.FieldValue = fildName + itemFields.FieldValue;
                             <div class="d-grid col-12 mx-auto">
-                                <a class="btn btn-outline-info col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
+                                <a class="btn btn-outline-info btn-lg col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
                             </div>
                             addClickStatictic();
                             break;
                         default:
                             <div class="d-grid col-12 mx-auto">
-                                <a class="btn btn-outline-secondary col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
+                                <a class="btn btn-outline-secondary btn-lg col-12" href="@itemFields.FieldValue">@itemFields.FieldName</a>
                             </div><br>
                             addClickStatictic();
                             break;
@@ -77,7 +77,7 @@
                         За месяц: <a href="~/Card/ShowVisits?Id=@item.Id&format=Month">( @visitCountLastMonth )<text></a> |
                         За день: <a href="~/Card/ShowVisits?Id=@item.Id&format=Day">( @visitCountLastDay )<text></a>
                     </p>
-                    <a class="btn btn-secondary" href="~/Card/Edit/@item.Id">Редактировать</a><br><br>
+                    <a class="btn btn-secondary col-auto btn-lg" href="~/Card/Edit/@item.Id">Редактировать</a><br><br>
 
                 }
             </div>

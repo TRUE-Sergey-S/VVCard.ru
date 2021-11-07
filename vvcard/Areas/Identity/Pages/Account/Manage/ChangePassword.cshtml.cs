@@ -34,12 +34,12 @@ namespace vvcard.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Пароль не может быть пустым")]
             [DataType(DataType.Password)]
             [Display(Name = "Текущий пароль")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Новый пароль не может быть пустым")]
             [StringLength(50, MinimumLength = 6, ErrorMessage = "Длина строки должна быть от 6 до 50 символов")]
             [DataType(DataType.Password)]
             [Display(Name = "Новый пароль")]

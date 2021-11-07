@@ -31,8 +31,8 @@ namespace vvcard.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Не указан E-mail")]
+            [EmailAddress(ErrorMessage = "Некорректный адрес")]
             public string Email { get; set; }
         }
 

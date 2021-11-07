@@ -51,13 +51,13 @@ namespace vvcard.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Не указано имя пользователя")]
             public string UserName { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Не указан E-mail")]
+            [EmailAddress(ErrorMessage = "Некорректный адрес")]
             [Display(Name = "E-mail")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(50, MinimumLength = 6, ErrorMessage = "Длина строки должна быть от 6 до 50 символов")]
+            [Required(ErrorMessage = "Пароль не может быть пустым")]
+            [StringLength(50, MinimumLength = 6, ErrorMessage = "Длина пароля должна быть от 6 до 50 символов")]
             [DataType(DataType.Password)]
             [Display(Name = "Пароль")]
             public string Password { get; set; }

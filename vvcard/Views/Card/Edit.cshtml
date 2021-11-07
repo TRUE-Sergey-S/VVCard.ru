@@ -33,17 +33,17 @@
                         <input class="col-sm-3 col-md-3 col-lg-3 col-xl-3" type="text" asp-for="@Model.cardFields[i].FieldValue" />
                         <label class="col-auto"> - Ссылка</label>
                         <input class="col-sm-3 col-md-3 col-lg-3 col-xl-3" type="text" asp-for="@Model.cardFields[i].FieldName" />
-                        <label class="col-auto"> - Название <a class="btn btn-outline-secondary" onclick="DeleteElement(@i,event)">Удалить</a></label>
+                        <label class="col-auto"> - Название <a class="btn btn-outline-secondary btn-lg" onclick="DeleteElement(@i,event)">Удалить</a></label>
                     </div>
                     lastIndex = i;
                 }
             }
         </div>
-        <a class="btn btn-outline-secondary col-1" onclick="AddNewElement(@lastIndex)">Добавить поле</a>
+        <a class="btn btn-outline-secondary col-auto btn-lg" onclick="AddNewElement(@lastIndex)">Добавить поле</a>
             В случае добавления/удаления поля статитика кликов по всем полям будет обнулена.
         <div mb-3 row>
-            <input class="btn btn-secondary col-1" type="submit" value="Отправить" />
-            <a class="btn btn-outline-secondary col-1" href="~/Card/Delete/@Model.Id">Удалить</a>
+            <input class="btn btn-secondary col-auto btn-lg" type="submit" value="Отправить" />
+            <a class="btn btn-outline-secondary col-auto btn-lg" href="~/Card/Delete/@Model.Id">Удалить</a>
         </div>
     </div>
 </form>

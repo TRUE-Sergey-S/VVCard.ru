@@ -50,7 +50,7 @@ namespace vvcard.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Не указано имя пользователя")]
             public string UserName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Пароль не может быть пустым")]
             [DataType(DataType.Password)]
             [Display(Name = "Пароль")]
             //[Required(ErrorMessage = "")]
