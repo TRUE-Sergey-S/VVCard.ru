@@ -3,7 +3,7 @@
     ViewData["Title"] = "VVCard - Сайт визитка";
 }
 
-@if (Model.Count > 1)
+@if (Model.Count == 0)
 {
 <div>
     <h3>Новости</h3>
@@ -13,48 +13,22 @@
     З.Ы. Сайт на финишной прямой, конечно нет приделу совершенства, но еще немного и сайт будет полностью готов!<br />
     Подробней в <a href="https://vk.com/vvcardru">группе ВК</a>
 </div>
-<h3 class="border-top">Cлучайные визитки</h3>
-<div class="d-grid col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-8 mx-auto">
-    @foreach (var item in Model)
-    {
-        if (item != null)
-        {
-            <h3 class="text-center">@item.Name</h3>
-            var allfields = item.cardFields;
-            if (allfields != null)
-            {
-                foreach (var itemFields in allfields)
-                {
-                    if (itemFields.FieldName != null)
-                    {
-                        string fildName = "";
-                        switch (itemFields.FieldType)
-                        {
-                            case 1:
-                                <a class="btn text-dark btn-lg btn btn-outline-dark fs-4 col-form-label-sm disabled" @itemFields.Id>@itemFields.FieldName</a><br>
-                                break;
-                            case 2:
-                                <a class="btn btn-outline-primary btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
-                                break;
-                            case 3:
-                                fildName = "tel:";
-                                itemFields.FieldValue = fildName + itemFields.FieldValue;
-                                <a class="btn btn-outline-success btn-lg fs-4 flex-sm-row" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
-                                break;
-                            case 4:
-                                fildName = "mailto:";
-                                itemFields.FieldValue = fildName + itemFields.FieldValue;
-                                <a class="btn btn-outline-info btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
-                                break;
-                            default:
-                                <a class="btn btn-outline-secondary btn-lg fs-4" onclick="CardFieldClickAddLog(@itemFields.Id)" href="@itemFields.FieldValue">@itemFields.FieldName</a><br>
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+<br />
+<h3 class="border-top"> </h3>
+<div>
+    <h2>Как использовать визитку на сайте?</h2>
+    <h3>Как мультиссылку</h3>
+    Мультиссылка — страница, на которой находятся кнопки со ссылками на все ваши контакты: соцсети, мессенджеры, сайты, почту и телефон
+    <br />
+    <br />
+    <h3>Как виртуальная визитка в дополнение к физической</h3>
+    После создания визитки автоматически будет сгенерирован QR код который можно разместить на визитке или другом носителе.<br />
+    Продублировать данные с бумажной визитки.
+    Получателю карты не нужно вводить ссылки или номера телефонов, достаточно просто отсканировать QR Code и выбрать нужную ссылку.
+    <br />
+    <br />
+    <h3>Для отслеживание переходов и кликов по кнопкам</h3>
+    Сайт поддерживеет отслеживание переходов по ссылке и клики по кнопкам, таки образом можно узнать дату перехода, город, и кнопку накоторую нажал пользователь.
 </div>
 }
 else
@@ -103,4 +77,5 @@ else
     }
 </div>
 }
+<br /><br />
 

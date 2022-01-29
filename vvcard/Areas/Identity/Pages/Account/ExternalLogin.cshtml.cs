@@ -91,7 +91,7 @@ namespace vvcard.Areas.Identity.Pages.Account
             {
                 //TODO Убрать костыль для логирования входа черех стороние сервисы или не убирать...
                 var userName = info.Principal.Claims.FirstOrDefault(x => x.Value.Contains("@"));
-                await repository.AddLastLogInData(userName.Value);
+                await repository.AddLastLogInDataAsync(userName.Value);
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
                 return LocalRedirect(returnUrl);
             }

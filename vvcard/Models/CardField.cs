@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace vvcard.Models
 {
@@ -16,7 +13,7 @@ namespace vvcard.Models
         public List<ClickCardField> ClickCardFields { get; set; }
 
         public int CardId { get; set; }
-        public Card card { get; set; }
+        public Card Card { get; set; }
         
         public enum FieldTypeEnum
         {

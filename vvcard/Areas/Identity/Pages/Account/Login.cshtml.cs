@@ -92,7 +92,7 @@ namespace vvcard.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    await repository.AddLastLogInData(Input.UserName);
+                    await repository.AddLastLogInDataAsync(Input.UserName);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
