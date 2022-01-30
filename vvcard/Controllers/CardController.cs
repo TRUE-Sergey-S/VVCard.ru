@@ -246,13 +246,14 @@ namespace vvcard.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowVisits(int cardId, string format)
+        public async Task<IActionResult> ShowVisits(int id, string format)
         {
             Log.Debug($"ShowVisits start. User: {User.Identity?.Name}");
             try
             {
                 var user = await _repository.GetUserAsync(User.Identity?.Name);
-                var visitCounters = await _repository.GetVisits(user, cardId, format);
+                //TODO Переделать на возврат только количества visitCounters
+                var visitCounters = await _repository.GetVisits(user, id, format);
                 Log.Debug($"ShowVisits completed. visitCounters.Count: {visitCounters.Count}. User: {User.Identity?.Name}");
                 return View(visitCounters);
             }
@@ -269,7 +270,7 @@ namespace vvcard.Controllers
         
         [AllowAnonymous]
         [HttpPost]
-        public async Task AddCardFieldClick(int cardFieldId)
+        public async Task AddCardFieldClick(int Id)
         {
             Log.Debug($"AddCardFieldClick start. User: {User.Identity?.Name ?? "Anonymous"}");
             try
@@ -277,7 +278,7 @@ namespace vvcard.Controllers
                 if (HttpContext.Connection.RemoteIpAddress != null)
                 {
                     var ip = HttpContext.Connection.RemoteIpAddress.ToString();
-                    await _repository.AddCardFieldClick(cardFieldId, ip);
+                    await _repository.AddCardFieldClick(Id, ip);
                 }
             }
             catch (Exception e)
