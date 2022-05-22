@@ -3,8 +3,6 @@ vvcard/bin/
 vvcard/obj/Debug/net5.0/vvcard.Views.pdb
 vvcard/obj/
 vvcard.sln
-vvcard/vvcard.csproj.user
-vvcard/vvcard.csproj
 .vs/vvcard/v16/TestStore/0/testlog.manifest
 vvcard/Properties/serviceDependencies.local.json.user
 vvcard/Properties/serviceDependencies.local.json
@@ -21,5 +19,5 @@ vvcard/Migrations/ApplicationContextModelSnapshot.cs
 .vs/vvcard/v16/TestStore/0/082.testlog
 .vs/vvcard/v16/.suo
 .vs/vvcard/DesignTimeBuild/.dtbcache.v2
-vvcard/Migrations/20220522101139_init.Designer.cs
+vvcard/Migrations/*
 vvcard/Migrations/20220522101139_init.cs
