@@ -21,3 +21,5 @@ vvcard/Migrations/ApplicationContextModelSnapshot.cs
 .vs/vvcard/v16/TestStore/0/082.testlog
 .vs/vvcard/v16/.suo
 .vs/vvcard/DesignTimeBuild/.dtbcache.v2
+vvcard/Migrations/20220522101139_init.Designer.cs
+vvcard/Migrations/20220522101139_init.cs

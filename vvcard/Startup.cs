@@ -28,8 +28,8 @@ namespace vvcard
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connetion = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connetion));
+            string connetion = Configuration.GetConnectionString("DefaultConfiguration");
+            services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connetion).UseSnakeCaseNamingConvention());
             services.AddScoped<IRepository, CardStore>();
             services.AddScoped<IEmailSender, EmailService>();
             services.AddDefaultIdentity<User>(o => { o.SignIn.RequireConfirmedAccount = true; })
