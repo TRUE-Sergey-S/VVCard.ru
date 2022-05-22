@@ -1,0 +1,13 @@
+[Unit]
+Description=vvcard App
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash  /home/user/VVCard.ru/vvcard/start_server.sh
+ExecReload=/bin/kill -HUP $MAINPID
+User=user
+
+[Install]
+Alias=vvcard.service
+WantedBy=multi-user.target
