@@ -21,3 +21,7 @@ vvcard/Migrations/ApplicationContextModelSnapshot.cs
 .vs/vvcard/DesignTimeBuild/.dtbcache.v2
 vvcard/Migrations/*
 vvcard/Migrations/20220522101139_init.cs
+.idea/
+vvcard/porjectVVCard.ruVVCard.ruvvcard/ReleaseBin/appsettings.json
+vvcard/porjectVVCard.ruVVCard.ruvvcard/ReleaseBin/wwwroot/js/site.js
+vvcard/porjectVVCard.ruVVCard.ruvvcard/ReleaseBin/

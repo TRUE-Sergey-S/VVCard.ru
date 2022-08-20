@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.HttpOverrides;
 using vvcard.Models;
 
 namespace vvcard
@@ -40,8 +41,7 @@ namespace vvcard
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
+                    IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
                     options.ClientId = Configuration["Google-OAuth:ClientId"];
                     options.ClientSecret = Configuration["Google-OAuth:ClientSecret"];
                     options.CallbackPath = new PathString("/GoogleLoginCallback");
@@ -86,6 +86,15 @@ namespace vvcard
 
         public void Configure(IApplicationBuilder app)
         {
+            var forwardedHeadersOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+                RequireHeaderSymmetry = false
+            };
+            forwardedHeadersOptions.KnownNetworks.Clear();
+            forwardedHeadersOptions.KnownProxies.Clear();
+
+            app.UseForwardedHeaders(forwardedHeadersOptions);
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseRouting();
